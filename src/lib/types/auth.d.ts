@@ -5,7 +5,7 @@ export interface LoginDetails {
 
 export interface UserProfile {
 	id: number;
-	firt_name: string;
+	first_name: string;
 	last_name?: string;
 	email: string;
 }

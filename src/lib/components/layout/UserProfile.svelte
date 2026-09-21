@@ -1,6 +1,12 @@
 <script lang="ts">
 	import { authStore } from '$lib/stores/auth-store.svelte';
 	import DownArrow from '../icons/DownArrow.svelte';
+
+	const getAvataIcon = (firstName: string, lastName: string | null = '') => {
+		const firstInitial = firstName.charAt(0) || '';
+		const lastInitial = lastName?.charAt(0) || '';
+		return (firstInitial + lastInitial).toUpperCase();
+	};
 </script>
 
 {#if authStore.token && authStore.isLoadingUser}
@@ -17,8 +23,11 @@
 	>
 		<span
 			class="text-muted grid h-8 w-8 place-items-center rounded-full bg-page text-xs font-semibold"
-			>AK</span
 		>
+			{authStore.user
+				? getAvataIcon(authStore.user.first_name, authStore.user.last_name ?? '')
+				: 'AU'}
+		</span>
 		<DownArrow />
 	</button>
 {/if}
